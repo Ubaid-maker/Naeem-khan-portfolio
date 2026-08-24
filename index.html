@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Muhammad Naeem Khan — Electrical Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#0A1628;
+    --navy-800:#16283F;
+    --navy-700:#1E3550;
+    --paper:#F1F3F0;
+    --paper-dim:#E7EAE5;
+    --copper:#B5793C;
+    --copper-light:#D9A466;
+    --slate:#57687A;
+    --line:#D6DAD3;
+    --ok:#5C7A5E;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--navy-950);
+    font-family:'IBM Plex Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  ::selection{background:var(--copper-light); color:var(--navy-950);}
+
+  /* ---------- layout shells ---------- */
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  section{padding:96px 0;}
+  @media (max-width:640px){ section{padding:64px 0;} .wrap{padding:0 20px;} }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--copper);
+    display:flex; align-items:center; gap:10px;
+    margin:0 0 18px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--copper); display:inline-block;}
+
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0; font-weight:600; letter-spacing:-.01em;}
+  p{line-height:1.65; color:var(--slate); margin:0 0 16px;}
+
+  /* ---------- nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(241,243,240,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .navrow{display:flex; align-items:center; justify-content:space-between; padding:18px 0;}
+  .brand{font-family:'Fraunces',serif; font-weight:600; font-size:18px; letter-spacing:-.01em; text-decoration:none; color:var(--navy-950); display:flex; align-items:center; gap:10px;}
+  .brand .mark{width:10px; height:10px; border-radius:1px; background:var(--copper); transform:rotate(45deg); flex:none;}
+  nav.links{display:flex; gap:30px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.04em;}
+  nav.links a{text-decoration:none; color:var(--slate); position:relative; padding-bottom:3px;}
+  nav.links a:hover{color:var(--navy-950);}
+  @media (max-width:720px){ nav.links{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{padding:100px 0 60px;}
+  .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center;}
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero h1{font-size:clamp(38px,5.6vw,64px); line-height:1.03; color:var(--navy-950);}
+  .hero .role{
+    font-family:'IBM Plex Mono',monospace; color:var(--copper);
+    font-size:15px; margin-top:18px; letter-spacing:.02em;
+  }
+  .hero .desc{margin-top:22px; font-size:17px; max-width:52ch;}
+  .hero .cta-row{display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .btn{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:.05em;
+    text-decoration:none; padding:13px 22px; border-radius:2px; text-transform:uppercase;
+    display:inline-flex; align-items:center; gap:8px; transition:.2s ease;
+  }
+  .btn.primary{background:var(--navy-950); color:var(--paper);}
+  .btn.primary:hover{background:var(--copper); color:var(--navy-950);}
+  .btn.ghost{border:1px solid var(--navy-950); color:var(--navy-950);}
+  .btn.ghost:hover{background:var(--navy-950); color:var(--paper);}
+
+  /* signature scope element */
+  .scope{
+    background:var(--navy-950); border-radius:4px; padding:26px 26px 20px;
+    box-shadow:0 30px 60px -25px rgba(10,22,40,.45);
+  }
+  .scope-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
+  .scope-title{font-family:'IBM Plex Mono',monospace; color:var(--paper-dim); font-size:11px; letter-spacing:.1em; text-transform:uppercase;}
+  .scope-sub{font-family:'IBM Plex Mono',monospace; color:var(--copper-light); font-size:11px;}
+  .scope svg{width:100%; height:auto; display:block;}
+  .scope-caption{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#7C8CA0; margin-top:10px; letter-spacing:.03em;}
+  .iv-path{
+    stroke-dasharray:900; stroke-dashoffset:900;
+    animation:draw 2.6s ease forwards .3s;
+  }
+  @keyframes draw{ to{stroke-dashoffset:0;} }
+
+  /* stat strip */
+  .statstrip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-top:70px;}
+  .statgrid{display:grid; grid-template-columns:repeat(4,1fr); }
+  .statgrid > div{padding:26px 0; border-left:1px solid var(--line);}
+  .statgrid > div:first-child{border-left:none;}
+  @media (max-width:720px){ .statgrid{grid-template-columns:repeat(2,1fr);} .statgrid > div:nth-child(3){border-left:none;} }
+  .stat-num{font-family:'Fraunces',serif; font-size:34px; font-weight:600; color:var(--navy-950);}
+  .stat-label{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--slate); text-transform:uppercase; letter-spacing:.06em; margin-top:4px;}
+
+  /* ---------- research areas ---------- */
+  .areas-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:44px;}
+  @media (max-width:800px){ .areas-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .areas-grid{grid-template-columns:1fr;} }
+  .area-card{background:var(--paper); padding:30px 26px; position:relative;}
+  .area-card .idx{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--copper); display:block; margin-bottom:14px;}
+  .area-card h3{font-size:18px; font-weight:600; margin-bottom:10px;}
+  .area-card p{font-size:14px; margin:0;}
+
+  /* ---------- about / bio band ---------- */
+  .band{background:var(--navy-950); color:var(--paper);}
+  .band p{color:#B9C3CF;}
+  .band .eyebrow{color:var(--copper-light);}
+  .band .eyebrow::before{background:var(--copper-light);}
+  .about-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:60px;}
+  @media (max-width:860px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid h2{font-size:clamp(26px,3.4vw,36px); color:var(--paper); line-height:1.2;}
+  .credential-list{list-style:none; margin:26px 0 0; padding:0; font-family:'IBM Plex Mono',monospace; font-size:12.5px;}
+  .credential-list li{padding:12px 0; border-top:1px solid rgba(255,255,255,.12); display:flex; justify-content:space-between; gap:20px; color:#B9C3CF;}
+  .credential-list li span:last-child{color:var(--paper); text-align:right;}
+
+  /* ---------- education / experience timeline ---------- */
+  .tl{margin-top:50px; border-top:1px solid var(--line);}
+  .tl-row{display:grid; grid-template-columns:150px 1fr; gap:28px; padding:26px 0; border-bottom:1px solid var(--line);}
+  @media (max-width:640px){ .tl-row{grid-template-columns:1fr; gap:6px;} }
+  .tl-year{font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--copper); padding-top:2px;}
+  .tl-body h3{font-size:19px; margin-bottom:6px;}
+  .tl-body .org{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--slate); margin-bottom:10px; display:block;}
+  .tl-body ul{margin:8px 0 0; padding-left:18px; color:var(--slate); font-size:14.5px; line-height:1.65;}
+  .tl-body ul li{margin-bottom:4px;}
+
+  /* ---------- publications datasheet ---------- */
+  .pub-toggle{display:flex; gap:10px; margin:44px 0 0;}
+  .pub-tab{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.04em; text-transform:uppercase;
+    padding:10px 18px; border:1px solid var(--line); background:transparent; cursor:pointer; color:var(--slate); border-radius:2px;
+  }
+  .pub-tab.active{background:var(--navy-950); color:var(--paper); border-color:var(--navy-950);}
+  .pub-panel{display:none; margin-top:0;}
+  .pub-panel.active{display:block;}
+  .pub-sheet{border-top:1px solid var(--navy-950); margin-top:24px;}
+  .pub-item{
+    display:grid; grid-template-columns:60px 1fr; gap:24px;
+    padding:22px 0; border-bottom:1px solid var(--line);
+  }
+  .pub-num{font-family:'IBM Plex Mono',monospace; color:var(--copper); font-size:13px; padding-top:3px;}
+  .pub-item h4{font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:15.5px; line-height:1.5; margin:0 0 6px; color:var(--navy-950);}
+  .pub-item .venue{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--slate);}
+  .pub-item .authors{font-size:13.5px; color:var(--slate); margin-bottom:6px; line-height:1.6;}
+  .me{color:var(--navy-950); font-weight:600;}
+
+  /* ---------- trainings table ---------- */
+  .datasheet-note{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--slate);
+    border:1px solid var(--line); padding:20px 22px; margin-top:40px; line-height:1.8; background:var(--paper-dim);
+  }
+  table.spec{width:100%; border-collapse:collapse; margin-top:40px; font-size:13.5px;}
+  table.spec th{
+    text-align:left; font-family:'IBM Plex Mono',monospace; font-size:11px; text-transform:uppercase;
+    letter-spacing:.06em; color:var(--slate); padding:10px 14px; border-bottom:1px solid var(--navy-950);
+  }
+  table.spec td{padding:12px 14px; border-bottom:1px solid var(--line); color:var(--navy-950); vertical-align:top;}
+  table.spec tr:hover td{background:var(--paper-dim);}
+  .spec-wrap{overflow-x:auto;}
+
+  /* ---------- contact / footer ---------- */
+  .contact-band{background:var(--navy-950); color:var(--paper); text-align:left;}
+  .contact-grid{display:grid; grid-template-columns:1.2fr .8fr; gap:50px; align-items:end;}
+  @media (max-width:800px){ .contact-grid{grid-template-columns:1fr;} }
+  .contact-band h2{color:var(--paper); font-size:clamp(30px,4.2vw,48px); line-height:1.08;}
+  .contact-list{list-style:none; padding:0; margin:0; font-family:'IBM Plex Mono',monospace; font-size:14px;}
+  .contact-list li{padding:16px 0; border-top:1px solid rgba(255,255,255,.14);}
+  .contact-list a{text-decoration:none; color:var(--paper);}
+  .contact-list a:hover{color:var(--copper-light);}
+  .contact-list .k{display:block; color:#7C8CA0; font-size:11px; text-transform:uppercase; letter-spacing:.08em; margin-bottom:6px;}
+  footer{padding:26px 0; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--slate); background:var(--paper);}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap navrow">
+    <a class="brand" href="#top"><span class="mark"></span>Dr. M. Naeem Khan</a>
+    <nav class="links">
+      <a href="#fit">Target Role</a>
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#publications">Publications</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn ghost" href="#contact" style="padding:9px 16px;">Contact</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Assistant Professor · Electrical Engineering</p>
+        <h1>Muhammad Naeem&nbsp;Khan</h1>
+        <p class="role">UET Peshawar, Bannu Campus — Power Electronics &amp; Semiconductor Device Modeling</p>
+        <p class="desc">Seventeen years of teaching and research spanning GaN/SiC device characterization, power‑line and cognitive‑radio communication, and bio‑inspired energy optimization — with 13 journal papers and 4 conference publications along the way.</p>
+        <div class="cta-row">
+          <a class="btn primary" href="#fit">Target Role: PSU CNE Dept.</a>
+          <a class="btn ghost" href="https://scholar.google.com/citations?user=T8DsCfoAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar ↗</a>
+        </div>
+      </div>
+
+      <div class="scope">
+        <div class="scope-head">
+          <span class="scope-title">Device I‑V Characteristic</span>
+          <span class="scope-sub">GaN HEMT · DC Sweep</span>
+        </div>
+        <svg viewBox="0 0 380 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="30" y1="10" x2="30" y2="190" stroke="#2A3F5C" stroke-width="1"/>
+          <line x1="30" y1="190" x2="365" y2="190" stroke="#2A3F5C" stroke-width="1"/>
+          <g stroke="#1C2E48" stroke-width="1">
+            <line x1="30" y1="150" x2="365" y2="150"/>
+            <line x1="30" y1="110" x2="365" y2="110"/>
+            <line x1="30" y1="70" x2="365" y2="70"/>
+            <line x1="30" y1="30" x2="365" y2="30"/>
+          </g>
+          <path class="iv-path" d="M30,188 C 90,186 130,178 160,150 C 195,118 210,80 240,55 C 270,32 310,18 360,14"
+                stroke="#D9A466" stroke-width="2.4" stroke-linecap="round"/>
+          <path class="iv-path" d="M30,189 C 100,188 150,186 190,175 C 230,160 260,120 300,80 C 325,55 345,35 362,26"
+                stroke="#5C7A9E" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
+          <text x="30" y="208" fill="#7C8CA0" font-family="IBM Plex Mono" font-size="9">0</text>
+          <text x="340" y="208" fill="#7C8CA0" font-family="IBM Plex Mono" font-size="9">V_DS</text>
+          <text x="6" y="14" fill="#7C8CA0" font-family="IBM Plex Mono" font-size="9">I_D</text>
+        </svg>
+        <p class="scope-caption">Illustrative curve — after Khan et al., J. Computational Electronics, 2018–19</p>
+      </div>
+    </div>
+
+    <div class="statstrip wrap" style="padding:0;">
+      <div class="statgrid">
+        <div>
+          <div class="stat-num">290</div>
+          <div class="stat-label">Citations (Scholar)</div>
+        </div>
+        <div>
+          <div class="stat-num">13</div>
+          <div class="stat-label">Journal Papers</div>
+        </div>
+        <div>
+          <div class="stat-num">17+</div>
+          <div class="stat-label">Years Teaching</div>
+        </div>
+        <div>
+          <div class="stat-num">4</div>
+          <div class="stat-label">IEEE Conf. Papers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARGET ROLE FIT -->
+  <section id="fit" style="background:var(--paper-dim); padding-top:70px; padding-bottom:70px;">
+    <div class="wrap">
+      <p class="eyebrow">Applying for</p>
+      <h2 style="font-size:clamp(24px,3vw,32px); max-width:34ch;">Faculty Position — Communications &amp; Networks Engineering Dept., Prince Sultan University, Riyadh</h2>
+      <p style="margin-top:14px; max-width:64ch;">PSU's College of Engineering is hiring at Assistant/Associate/Full Professor rank to teach Electrical Circuits, Electronics Engineering, Advanced Electronics, Power Electronics, Semiconductor Design, Logic Design and the Senior Design Project for AY 2026/2027.</p>
+
+      <div class="areas-grid" style="margin-top:36px;">
+        <div class="area-card"><span class="idx">PhD</span><h3>Doctoral qualification</h3><p>PhD in Electrical Engineering, CUST Islamabad (2020) — meets PSU's required qualification.</p></div>
+        <div class="area-card"><span class="idx">17+ yrs</span><h3>Teaching record</h3><p>Electronics &amp; Circuits, Communication Systems and DSP taught continuously since 2004 — direct overlap with the listed courses.</p></div>
+        <div class="area-card"><span class="idx">Devices</span><h3>Semiconductor design research</h3><p>Published DC/AC analytical models for GaN HEMTs and SiC MESFETs — squarely aligned with the Semiconductor Design course.</p></div>
+        <div class="area-card"><span class="idx">FYP</span><h3>Senior design supervision</h3><p>Ongoing undergraduate final‑year‑project supervision maps directly to PSU's Senior Design Project course.</p></div>
+        <div class="area-card"><span class="idx">PEC</span><h3>Professional registration</h3><p>Registered Professional Electrical Engineer, Pakistan Engineering Council (#ELECT/19948).</p></div>
+        <div class="area-card"><span class="idx">13+4</span><h3>Publication record</h3><p>13 journal and 4 IEEE conference papers in device modeling, power/energy systems and communications.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH AREAS -->
+  <section id="research">
+    <div class="wrap">
+      <p class="eyebrow">Focus areas</p>
+      <h2 style="font-size:clamp(26px,3.4vw,38px); max-width:22ch;">Research spanning devices, power, and communication systems.</h2>
+
+      <div class="areas-grid">
+        <div class="area-card"><span class="idx">01</span><h3>Power Electronics &amp; Energy Optimization</h3><p>Bio‑inspired algorithms for energy management in offices, homes, and smart cities.</p></div>
+        <div class="area-card"><span class="idx">02</span><h3>Semiconductor Device Modeling</h3><p>Temperature‑dependent DC/AC analytical models for GaN HEMTs and SiC MESFETs.</p></div>
+        <div class="area-card"><span class="idx">03</span><h3>Solar Energy Cells</h3><p>Perovskite (CH₃NH₃PbI₃) absorber‑layer simulation for high‑efficiency solar cells.</p></div>
+        <div class="area-card"><span class="idx">04</span><h3>Smart Grid Systems</h3><p>Optimization strategies for distributed and city‑scale energy networks.</p></div>
+        <div class="area-card"><span class="idx">05</span><h3>Wireless &amp; Cognitive Radio</h3><p>MIMO systems, USRP‑based CDMA signal transmission, and spectrum‑aware communication.</p></div>
+        <div class="area-card"><span class="idx">06</span><h3>Power Line Communication</h3><p>Signal processing and state‑estimation techniques for PLC and nonlinear systems.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT / BAND -->
+  <section class="band" id="about">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2>An engineer's grounding in teaching, research, and academic service.</h2>
+        <p style="margin-top:22px;">Dr. Khan has served the Department of Electrical Engineering at UET Peshawar's Bannu Campus since 2004 — first as Lecturer, then as Assistant Professor from 2009. His coursework spans Communication Systems, Digital Signal Processing, and Electronics &amp; Circuits, alongside supervising undergraduate final‑year projects.</p>
+      </div>
+      <div>
+        <ul class="credential-list">
+          <li><span>PhD, Electrical Engineering</span><span>CUST, Islamabad · 2020</span></li>
+          <li><span>Professional registration</span><span>PEC — Reg. #ELECT/19948</span></li>
+          <li><span>Institution</span><span>UET Peshawar, Bannu Campus</span></li>
+          <li><span>Current rank</span><span>Assistant Professor (BPS‑19)</span></li>
+          <li><span>Committee service</span><span>OBE Monitoring · FYP Evaluation</span></li>
+          <li><span>Lab &amp; committee charge</span><span>Telecom Lab · Industrial Advisory (IAC)</span></li>
+          <li><span>Additional charge held</span><span>Acting Chairman, EED</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <p class="eyebrow">Academic experience</p>
+      <h2 style="font-size:clamp(26px,3.4vw,38px);">Positions held</h2>
+
+      <div class="tl">
+        <div class="tl-row">
+          <div class="tl-year">2009 — Date</div>
+          <div class="tl-body">
+            <h3>Assistant Professor (BPS‑19)</h3>
+            <span class="org">Department of Electrical Engineering, UET Peshawar, Bannu Campus</span>
+            <ul>
+              <li>Lectures to 2nd &amp; 3rd year undergraduates in Communication Systems</li>
+              <li>Final‑year Digital Signal Processing (DSP) instruction</li>
+              <li>Electronics &amp; Circuits coursework</li>
+              <li>Undergraduate final‑year project (FYP) supervision</li>
+            </ul>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-year">2004 — 2009</div>
+          <div class="tl-body">
+            <h3>Lecturer</h3>
+            <span class="org">Department of Electrical Engineering, UET Peshawar, Bannu Campus</span>
+            <ul>
+              <li>Lectures to 3rd year undergraduate students</li>
+              <li>Practical laboratory instruction for 3rd year students</li>
+              <li>Electronics, Wireless Communication &amp; Electric Circuit Theory</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="datasheet-note">
+        <strong style="color:var(--navy-950); font-family:'IBM Plex Sans';">Extra academic duties —</strong>
+        Member, OBE Monitoring Committee · Ex‑Officio PTM, EED Bannu Campus · Member, FYP Evaluation Committee ·
+        In‑charge, Industrial Advisory Committee (IAC), Bannu Campus · In‑charge, Telecommunication Laboratory ·
+        Acting Chairman, Electrical Engineering Department
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education" style="background:var(--paper-dim);">
+    <div class="wrap">
+      <p class="eyebrow">Education</p>
+      <h2 style="font-size:clamp(26px,3.4vw,38px);">Academic record</h2>
+      <div class="tl">
+        <div class="tl-row"><div class="tl-year">2020</div><div class="tl-body"><h3>PhD, Electrical Engineering</h3><span class="org">Capital University of Science and Technology (CUST), Islamabad — CGPA 3.28 · Admitted 2018</span></div></div>
+        <div class="tl-row"><div class="tl-year">2008</div><div class="tl-body"><h3>MSc Electrical Engineering — Electronics &amp; Telecommunication</h3><span class="org">University of Engineering &amp; Technology, Peshawar — CGPA 3.2 (2‑year program)</span></div></div>
+        <div class="tl-row"><div class="tl-year">2004</div><div class="tl-body"><h3>BSc Electrical Engineering</h3><span class="org">University of Engineering &amp; Technology, Peshawar — 78%, A Grade (4‑year program)</span></div></div>
+        <div class="tl-row"><div class="tl-year">1996</div><div class="tl-body"><h3>FSc Pre‑Engineering</h3><span class="org">Bannu Board</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="wrap">
+      <p class="eyebrow">Publication record</p>
+      <h2 style="font-size:clamp(26px,3.4vw,38px);">Journals &amp; conference proceedings</h2>
+      <p style="margin-top:14px; max-width:60ch;">13 peer‑reviewed journal articles and 4 conference papers, primarily on semiconductor device modeling, energy‑system optimization, and communication systems.</p>
+
+      <div class="pub-toggle">
+        <button class="pub-tab active" data-target="journals">Journals (13)</button>
+        <button class="pub-tab" data-target="conf">Conference (4)</button>
+      </div>
+
+      <div class="pub-panel active" id="journals">
+        <div class="pub-sheet">
+
+          <div class="pub-item"><span class="pub-num">01</span><div>
+            <h4>An improved model to assess temperature‑dependent DC characteristics of submicron GaN HEMTs</h4>
+            <div class="authors">MN Khan, UF Ahmed, MM Ahmed, S Rehman</div>
+            <div class="venue">Journal of Computational Electronics, 2018</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">02</span><div>
+            <h4>Simulation and comparative analysis of the DC characteristics of submicron GaN HEMTs for use in CAD software</h4>
+            <div class="authors">MN Khan, UF Ahmed, MM Ahmed, S Rehman</div>
+            <div class="venue">Journal of Computational Electronics 18(2), 482–491</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">03</span><div>
+            <h4>An improved temperature dependent analytical model to predict AlGaN/GaN high electron mobility transistors AC characteristics</h4>
+            <div class="authors">MN Khan, UF Ahmed, MM Ahmed, S Rehman</div>
+            <div class="venue">Int. Journal of Numerical Modelling: Electronic Networks, Devices and Circuits 32(6), e2648</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">04</span><div>
+            <h4>Temperature dependent analytical DC model for wide bandgap MESFETs</h4>
+            <div class="authors">SU Rehman, UF Ahmed, MM Ahmed, MN Khan</div>
+            <div class="venue">IEEE Access 7, 49702–49711</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">05</span><div>
+            <h4>A nonlinear model to assess DC/AC performance reliability of submicron SiC MESFETs</h4>
+            <div class="authors">S Rehman, MM Ahmed, U Rafique, MN Khan</div>
+            <div class="venue">Journal of Computational Electronics 17(3), 1199–1209</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">06</span><div>
+            <h4>An Efficient Energy Management in Office Using Bio‑inspired Energy Optimization Algorithms</h4>
+            <div class="authors">Ibrar Ullah, Zar Khitab, <span class="me">M. Naeem Khan</span>, Sajjad Hussain</div>
+            <div class="venue">Processes 7(3), 142 · 2019 · doi.org/10.3390/pr7030142 (IF 1.963)</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">07</span><div>
+            <h4>Optimizing Energy Consumption in Home Energy Management System via Bio‑Inspired Dragonfly Algorithm and Genetic Algorithm</h4>
+            <div class="authors">I. Hussain, M. Ullah, Ibrar Ullah, A. Bibi, <span class="me">M. Naeem</span>, M. Singh, D. Singh</div>
+            <div class="venue">Electronics 9(3), 406 · 2020 · doi.org/10.3390/electronics9030406 (IF 2.412)</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">08</span><div>
+            <h4>Exploiting Multi‑Verse Optimization and Sine‑Cosine Algorithms for Energy Management in Smart Cities</h4>
+            <div class="authors">Ibrar Ullah, Irshad Hussain, Peerapong Uthansaku, Muhammad Riaz, <span class="me">M. Naeem Khan</span>, Jaime Lloret</div>
+            <div class="venue">Applied Sciences 10(6), 2095 · 2020 · doi.org/10.3390/app10062095 (IF 2.474)</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">09</span><div>
+            <h4>Enhanced energy storage properties of La³⁺ modified 0.92 Bi₀.₅Na₀.₅TiO₃‑0.06 Ba(Zr₀.₂Ti₀.₈)O₃‑0.02 NaNbO₃ ternary ceramic system</h4>
+            <div class="authors">Aqib Ali Khan et al., incl. <span class="me">Muhammad Naeem Khan</span></div>
+            <div class="venue">Materials Research Express 8(4), 045506</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">10</span><div>
+            <h4>Numerical investigation of a new approach based on perovskite CH₃NH₃PbI₃ absorber layer for high‑efficiency solar cells</h4>
+            <div class="authors">M Sadiq, <span class="me">MN Khan</span>, M Arif, A Naveed, K Ullah, S Afridi</div>
+            <div class="venue">Materials Research Express</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">11</span><div>
+            <h4>A novel state estimation strategy for observation recovery in nonlinear systems based on ExpARMA algorithm</h4>
+            <div class="authors">N Khan, ZU Abdin, F Zaman, M Riaz, <span class="me">MN Khan</span></div>
+            <div class="venue">Measurement 172, 108886</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">12</span><div>
+            <h4>Exploiting USRP for RF Block Designing of CDMA Signal Transmission</h4>
+            <div class="authors">I Hussain, I Ullah, F Khan, N Khan, <span class="me">M Naeem</span>, S Khan, M Riaz, M Amir</div>
+            <div class="venue">Journal article</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">13</span><div>
+            <h4>U‑Shaped Low‑Complexity Type‑2 Fuzzy LSTM Neural Network for Speech Enhancement</h4>
+            <div class="authors">Nasir Saleem, Muhammad Irfan Khattak, Salman A. Alqahtani, Atif Jan, Irshad Hussain, <span class="me">Muhammad Naeem Khan</span>, Mostafa Dahshan</div>
+            <div class="venue">IEEE Access</div>
+          </div></div>
+
+        </div>
+      </div>
+
+      <div class="pub-panel" id="conf">
+        <div class="pub-sheet">
+
+          <div class="pub-item"><span class="pub-num">01</span><div>
+            <h4>Effects of substrate on the AC performance of submicron GaN HEMTs</h4>
+            <div class="authors">S Rehman, U Rafique, UF Ahmed, <span class="me">MN Khan</span>, MM Ahmed</div>
+            <div class="venue">2017 13th Int. Conf. on Emerging Technologies (ICET), 1–7</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">02</span><div>
+            <h4>Implementation of linear prediction techniques in state estimation</h4>
+            <div class="authors">Naeem Khan, M Irfan Khattak, <span class="me">M Naeem Khan</span>, Faheem Khan, LU Khan, S Abdul Salam, DW Gu</div>
+            <div class="venue">10th Int. Bhurban Conf. on Applied Sciences &amp; Technology (IBCAST) 2013, 77–83 · IEEE</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">03</span><div>
+            <h4>Effect of network density on the performance of MANET routing protocols</h4>
+            <div class="authors">Latif Ullah Khan, Faheem Khan, Naeem Khan, <span class="me">M Naeem Khan</span>, Bilal Pirzada</div>
+            <div class="venue">2013 Int. Conf. on Circuits, Power and Computing Technologies (ICCPCT), 1089–1092</div>
+          </div></div>
+
+          <div class="pub-item"><span class="pub-num">04</span><div>
+            <h4>On the optimal frame size of linear prediction techniques</h4>
+            <div class="authors">Faheem Khan, Naeem Khan, Latif Ullah Khan, <span class="me">M Naeem Khan</span>, Bilal Pirzada</div>
+            <div class="venue">2013 Int. Conf. on Circuits, Power and Computing Technologies (ICCPCT), 331–336</div>
+          </div></div>
+
+        </div>
+      </div>
+
+      <p class="eyebrow" style="margin-top:60px;">Seminars &amp; training</p>
+      <div class="spec-wrap">
+        <table class="spec">
+          <thead><tr><th>#</th><th>Training / workshop</th><th>Institution</th><th>Dates</th></tr></thead>
+          <tbody>
+            <tr><td>—</td><td>1.5 CPD Seminar (Resource Person): "Energy crises in Pakistan and their impacts on Residential, Commercial and Industrial Sectors"</td><td>UET Peshawar, Bannu Campus</td><td>31 Jan 2021</td></tr>
+            <tr><td>1</td><td>HEC Workshop on Case Based Study</td><td>HEC Regional Centre, Peshawar</td><td>03–04 Aug 2011</td></tr>
+            <tr><td>2</td><td>International Multi‑topic Symposium on Energy</td><td>CECOS University, Peshawar</td><td>06 Oct 2012</td></tr>
+            <tr><td>3</td><td>MIMO for Wireless Communication</td><td>COMSATS, Islamabad</td><td>26 Dec 2012</td></tr>
+            <tr><td>4</td><td>International Symposium on Cyber Security</td><td>CECOS University, Peshawar</td><td>14 Dec 2013</td></tr>
+            <tr><td>5</td><td>CPD Framework for Professional Development of Engineers</td><td>CECOS University, Peshawar</td><td>10 Mar 2014</td></tr>
+            <tr><td>6</td><td>Improving Energy Efficiency in Electrical Systems</td><td>CECOS University, Peshawar</td><td>18 Sep 2014</td></tr>
+            <tr><td>7</td><td>Improving Boiler Operating Efficiency</td><td>CECOS University, Peshawar</td><td>19 Sep 2014</td></tr>
+            <tr><td>8</td><td>Two‑day workshop: How to Sell Your Research Work</td><td>CECOS University, Peshawar</td><td>07–08 Aug 2015</td></tr>
+            <tr><td>9</td><td>Research Avenues: ICT Potential Applications for Pakistan</td><td>CECOS University, Peshawar</td><td>18 Nov 2015</td></tr>
+            <tr><td>10</td><td>Leadership for Engineers and Technical Managers</td><td>CECOS University, Peshawar</td><td>25 Nov 2015</td></tr>
+            <tr><td>11</td><td>11th IEEE Int. Conference on Emerging Technologies</td><td>CECOS University, Peshawar</td><td>19–20 Dec 2015</td></tr>
+            <tr><td>12</td><td>Two‑day workshop on OBE System</td><td>UET Peshawar</td><td>02–03 May 2017</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-band" id="contact">
+    <div class="wrap contact-grid">
+      <div>
+        <p class="eyebrow">Get in touch</p>
+        <h2>Open to collaboration in power electronics, device modeling &amp; energy systems.</h2>
+      </div>
+      <ul class="contact-list">
+        <li><span class="k">Email</span><a href="mailto:naeembannu@uetpeshawar.edu.pk">naeembannu@uetpeshawar.edu.pk</a></li>
+        <li><span class="k">Phone</span><a href="tel:+923349019348">+92 334 9019348</a></li>
+        <li><span class="k">Institution</span><span>EED, UET Peshawar — Bannu Campus, KPK, Pakistan</span></li>
+        <li><span class="k">Google Scholar</span><a href="https://scholar.google.com/citations?user=T8DsCfoAAAAJ&hl=en" target="_blank" rel="noopener">View profile ↗</a></li>
+        <li><span class="k">Applying to</span><span>Prince Sultan University — CNE Dept. Faculty Position</span></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 Dr. Muhammad Naeem Khan — Department of Electrical Engineering, UET Peshawar, Bannu Campus</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.pub-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.pub-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.target).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
